@@ -5,7 +5,7 @@ import {styled} from "@mui/material/styles";
 import {lightGreen} from "@mui/material/colors";
 
 const LoginButton = () => {
-    const {loginWithRedirect,isAuthenticated } = useAuth0();
+    const {loginWithRedirect,isAuthenticated} = useAuth0();
 
     const ColorButton = styled(Button)(({ theme }) => ({
         color: theme.palette.getContrastText(lightGreen[500]),
@@ -19,7 +19,7 @@ const LoginButton = () => {
     return(
         !isAuthenticated && (
             <ColorButton size="large" color="secondary" onClick={() => loginWithRedirect()}>
-                Yum Yum d
+                Yum Yum !
             </ColorButton>
         )
     )

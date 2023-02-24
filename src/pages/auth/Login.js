@@ -7,16 +7,14 @@ import useResponsive from '../../hooks/useResponsive';
 // components
 import Page from '../../components/Page';
 import Logo from '../../components/Logo';
-import Image from '../../components/Image';
 // sections
 import LoginButton from '../../components/LoginButton';
-import {lightGreen} from "@mui/material/colors";
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
-    [theme.breakpoints.up('md')]: {
-        display: 'flex',
-    },
+    display: 'flex',
+    justifyContent: 'center', // center logo and button
+    backgroundColor: '#fff', // set page background to white
 }));
 
 const HeaderStyle = styled('header')(({ theme }) => ({
@@ -27,12 +25,25 @@ const HeaderStyle = styled('header')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     position: 'absolute',
-    padding: theme.spacing(3),
-    justifyContent: 'space-between',
+    padding: theme.spacing(3, 5, 0, 5), // adjust padding values
+    justifyContent: 'center',
     [theme.breakpoints.up('md')]: {
         alignItems: 'flex-start',
-        padding: theme.spacing(7, 5, 0, 7),
+        padding: theme.spacing(30, 31, 0, 7),
     },
+}));
+
+
+const ContentStyle = styled('div')(({ theme }) => ({
+    maxWidth: 480,
+    margin: 'auto',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    padding: theme.spacing(12, 0),
+    backgroundColor: '#fff', // set content area background to white
+    color: 'black', // set text color to black
 }));
 
 const SectionStyle = styled(Card)(({ theme }) => ({
@@ -44,55 +55,36 @@ const SectionStyle = styled(Card)(({ theme }) => ({
     margin: theme.spacing(2, 0, 2, 2),
 }));
 
-const ContentStyle = styled('div')(({ theme }) => ({
-    maxWidth: 480,
-    margin: 'auto',
-    minHeight: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    padding: theme.spacing(12, 0),
-    backgroundColor: lightGreen[300],
-    color: 'white'
+const LogoStyle = styled(Logo)(({ theme }) => ({
+    width: 40,
+    border: '1px solid red', // temporary style for debugging
 }));
+
 
 // ----------------------------------------------------------------------
 
 export default function Login() {
-
-    const smUp = useResponsive('up', 'sm');
     const mdUp = useResponsive('down', 'sm');
-
     return (
         <Page title="Login">
             <RootStyle>
                 <HeaderStyle>
-                    <Logo />
-                    {smUp && (
-                        <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-                        </Typography>
-                    )}
+                    <LogoStyle />
                 </HeaderStyle>
-
                 {mdUp && (
                     <SectionStyle>
-                        <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-                            Hi, Welcome Back
-                        </Typography>
-                        <Image visibleByDefault disabledEffect src="" alt="login" />
                     </SectionStyle>
                 )}
                 <Container maxWidth="sm">
                     <ContentStyle>
                         <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
-                            <Box sx={{ flexGrow: 1 }}>
-                                <Typography variant="h4" gutterBottom>
+                            <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+                                <Typography variant="h5" gutterBottom>
                                     Let's add some flavour
                                 </Typography>
-                                <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
                             </Box>
                         </Stack>
-                        <LoginButton/>
+                        <LoginButton />
                     </ContentStyle>
                 </Container>
             </RootStyle>
