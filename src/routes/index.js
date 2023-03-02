@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/auth/Login'
+import Main from '../pages/Main'
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ const Router = () => {
                 <Route path="/" element={<Navigate to="/login" />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/callback" element={<CallbackPage />} />
+                <Route path="/main" element={<Main/>} />
             </Routes>
         </BrowserRouter>
     );
