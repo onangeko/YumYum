@@ -23,5 +23,29 @@ async function searchRecipes(query) {
     }
 }
 
-export default searchRecipes;
+async function getRecipeInfo(id){
+    try {
+        const response = await axios.get(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/information`, {
+            headers: {
+                'x-rapidapi-key': RAPIDAPI_API_KEY,
+                'x-rapidapi-host': RAPIDAPI_API_HOST,
+            },
+            params: {
+                includeNutrition: true,
+            },
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+    searchRecipes,
+    getRecipeInfo,
+}
 

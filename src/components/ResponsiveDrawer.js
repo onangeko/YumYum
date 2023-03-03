@@ -17,21 +17,24 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import SearchBar from './SearchBar';
-import SpooncularAPI from "../api/SpooncularAPI";
+import Api from '../api/Api';
+import DishCardsGrid from "./DishCardGrid";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [dishes, setDishes] = React.useState([]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
     const handleSearchSubmit = async (query) => {
-        const data = await SpooncularAPI.searchRecipes(query);
+        const data = await Api.searchRecipes(query);
         console.log(data); // do something with the response data
+        setDishes(data.results);
     }
 
 
@@ -75,8 +78,11 @@ function ResponsiveDrawer(props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 2 }}>
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3, marginTop: '100px' }}>
                 <SearchBar onSearch={handleSearchSubmit} />
+            </Box>
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '100px' }}>
+                <DishCardsGrid dishes={dishes} />
             </Box>
             <Drawer
                 container={container}

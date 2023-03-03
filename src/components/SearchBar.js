@@ -3,37 +3,38 @@ import { styled, alpha } from '@mui/system';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
-import { makeStyles } from '@mui/styles';
+import {makeStyles} from "@mui/styles";
 
-const SearchContainer = styled('div')({
+const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(3),
+        width: 'auto',
+    },
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    padding: '16px',
-    marginBottom: '16px', // Added to move button below search bar
-});
+    padding: '4px 8px',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}));
 
 const useStyles = makeStyles((theme) => ({
-    search: {
-        position: 'relative',
-        borderRadius: '24px',
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: alpha(theme.palette.common.white, 0.25),
-        },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
-            width: 'auto',
-        },
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: '4px 8px',
-        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-    },
     inputRoot: {
         color: 'inherit',
         flexGrow: 1,
@@ -46,9 +47,8 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
     button: {
-        borderRadius: '24px',
-        marginTop: '8px',
-        padding: '8px 24px',
+        marginLeft: theme.spacing(2),
+        borderRadius: theme.shape.borderRadius,
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
         textTransform: 'none',
@@ -73,29 +73,29 @@ function SearchBar(props) {
 
     return (
         <form onSubmit={handleSearchSubmit}>
-            <SearchContainer>
-                <div className={classes.search}>
+            <Search>
+                <SearchIconWrapper>
                     <SearchIcon />
-                    <InputBase
-                        placeholder="Search for a dish"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{ 'aria-label': 'search' }}
-                        value={searchTerm}
-                        onChange={handleSearchTermChange}
-                    />
-                </div>
+                </SearchIconWrapper>
+                <InputBase
+                    placeholder="Search for a dish"
+                    classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                    }}
+                    inputProps={{ 'aria-label': 'search' }}
+                    value={searchTerm}
+                    onChange={handleSearchTermChange}
+                />
                 <Button
                     type="submit"
                     className={classes.button}
                     variant="contained"
                     disableElevation
                 >
-                    Let's get tasty
+                    Submit
                 </Button>
-            </SearchContainer>
+            </Search>
         </form>
     );
 }
