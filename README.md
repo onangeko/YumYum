@@ -1,34 +1,31 @@
-Yum Yum
-Yum Yum is a recipe search and meal planning app built with React and the Spoonacular API.
+# Project Name
 
-Features
-Search for recipes by keywords or ingredients
-View recipe details, including ingredients, cooking steps, and nutritional information
-Save favorite recipes to local storage
-Plan meals for the week using a drag-and-drop interface
-Installation
-Clone the repository to your local machine.
-Install dependencies with npm install.
-Start the development server with npm start.
-Open your browser and navigate to http://localhost:3000.
-Usage
-Searching for recipes
-To search for recipes, enter a keyword or list of ingredients in the search bar at the top of the screen. The app will display a list of recipes that match your search criteria.
+A brief description of the project.
 
-Viewing recipe details
-Click on a recipe card to view the details of that recipe, including the ingredients, cooking steps, and nutritional information.
+## Table of Contents
 
-Saving recipes
-To save a recipe for future reference, click the "Save Recipe" button on the recipe details page. The recipe will be added to your list of saved recipes, which you can access from the "Saved Recipes" page in the app's sidebar.
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Reference](#api-reference)
+- [Contributing](#contributing)
+- [License](#license)
 
-Meal planning
-To plan meals for the week, click the "Meal Planner" button in the app's sidebar. The meal planner interface allows you to drag and drop recipes onto each day of the week. You can also save your meal plan for future reference.
+## Installation
 
-Contributing
-If you would like to contribute to the project, please fork the repository and submit a pull request with your changes. All contributions are welcome!
+Explain how to install and set up the project. Include any dependencies that need to be installed, and instructions on how to run the project locally.
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Usage
 
+Explain how to use the project, and any features or functionality that it includes. Provide examples and screenshots where appropriate.
 
+## API Reference
 
+If the project includes an API or other external resources, include information about how to access and use them here.
+
+## Contributing
+
+Explain how others can contribute to the project, and any guidelines or requirements for contributions. Include instructions on how to submit bug reports, feature requests, or pull requests.
+
+## License
+
+Include information about the project's license, and any usage or distribution restrictions that apply.
