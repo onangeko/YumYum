@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -19,13 +19,21 @@ import Typography from '@mui/material/Typography';
 import SearchBar from './SearchBar';
 import Api from '../api/Api';
 import DishCardsGrid from "./DishCardGrid";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Logo from "./Logo";
+import MealPlanner from "./MealPlanner";
+import {Avatar, Badge} from "@mui/material";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+
     const { window } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [dishes, setDishes] = React.useState([]);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [dishes, setDishes] = useState([]);
+    const [selectedPage, setSelectedPage] = useState('home');
+    const [savedRecipes, setSavedRecipes] = useState([]);
+    const [mealPlan, setMealPlan] = useState([]);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -35,19 +43,40 @@ function ResponsiveDrawer(props) {
         const data = await Api.searchRecipes(query);
         console.log(data); // do something with the response data
         setDishes(data.results);
-    }
+    };
 
+    const handleSavedRecipesClick = async () => {
+        setSelectedPage('savedRecipes');
+        const savedRecipes = await localStorage.getItem('savedRecipes') || [];
+        setSavedRecipes(savedRecipes);
+    };
+
+    const handleMealPlannerClick = () => {
+        setSelectedPage('mealPlanner');
+    };
+
+    const handleMealPlanClick = async () => {
+        setSelectedPage('mealPlan');
+    };
+
+    const handleAddToMealPlan = (recipe) => {
+        setMealPlan([...mealPlan, recipe]);
+    };
+
+    const handleClearMealPlan = () => {
+        setMealPlan([]);
+    };
 
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
             <List>
-                {['Home', 'Saved Recipe'].map((text, index) => (
+                {['Home', 'Saved Recipe', 'Meal Planner'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton onClick={() => handleDrawerToggle(text)}>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <HomeIcon/> : <RamenDiningIcon/>}
+                                {index % 3 === 0 ? <HomeIcon/> : index % 3 === 1 ? <RamenDiningIcon/> : <MenuBookIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
@@ -59,6 +88,7 @@ function ResponsiveDrawer(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
+    let logo = Logo;
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
             <CssBaseline />
@@ -73,32 +103,49 @@ function ResponsiveDrawer(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                         YUM YUM
                     </Typography>
+                    <IconButton color="inherit">
+                        <Avatar alt="User Avatar" src="/images/avatar.jpg" />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
-            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3, marginTop: '100px' }}>
-                <SearchBar onSearch={handleSearchSubmit} />
+            <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', marginTop: '70px' }}>
+                <Toolbar />
+                {selectedPage === 'home' ? (
+                    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3 }}>
+                        <SearchBar onSearch={handleSearchSubmit} />
+                    </Box>
+                ) : (
+                    <Box sx={{ flexGrow: 1 }} />
+                )}
+                {selectedPage === 'home' && (
+                    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+                        <DishCardsGrid dishes={dishes} />
+                    </Box>
+                )}
+                {selectedPage === 'savedRecipes' && (
+                    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
+                        <Typography variant="h4" sx={{ marginLeft: 2 }}>Saved Recipes</Typography>
+                        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3 }}>
+                            {savedRecipes.length > 0 ? (
+                                <DishCardsGrid dishes={savedRecipes} />
+                            ) : (
+                                <Typography variant="h6">No saved recipes yet.</Typography>
+                            )}
+                        </Box>
+                    </Box>
+                )}
+                {selectedPage === 'mealPlanner' && (
+                    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
+                        <Typography variant="h4" sx={{ marginLeft: 2 }}>Meal Planner</Typography>
+                        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3 }}>
+                            <MealPlanner />
+                        </Box>
+                    </Box>
+                )}
             </Box>
-            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '100px' }}>
-                <DishCardsGrid dishes={dishes} />
-            </Box>
-            <Drawer
-                container={container}
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                ModalProps={{
-                    keepMounted: true,
-                }}
-                sx={{
-                    display: { xs: 'block', sm: 'none' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-                }}
-            >
-                {drawer}
-            </Drawer>
             <Drawer
                 variant="permanent"
                 sx={{

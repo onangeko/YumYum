@@ -20,8 +20,8 @@ export default function DishCardsGrid(props) {
 
     return (
         <>
-            <Grid container spacing={5} sx={{ mx: 60 }}>
-                {dishes.map((dish,index) => (
+            <Grid container spacing={5} sx={{ mx: 2, pl: 35 }}>
+                {dishes.map((dish, index) => (
                     <Grid item xs={12} sm={4} key={index}>
                         <DishCards dish={dish} onClick={() => handleCardClick(dish)} />
                     </Grid>
