@@ -24,7 +24,8 @@ This is a recipe app called Yum Yum, which allows users to search for and save t
 
 ## Acknowledgments
 
-This project was created as part of a coding bootcamp and was inspired by my love for cooking and finding new recipes to try. Special thanks to Spoonacular API for providing the recipe data.
+Spooncular API
+MUI
 
 ## License
 
