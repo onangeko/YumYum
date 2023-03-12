@@ -1,31 +1,31 @@
-# Project Name
+# Yum Yum Recipe App
 
-A brief description of the project.
+This is a recipe app called Yum Yum, which allows users to search for and save their favorite recipes. Users can search for recipes by entering a keyword or ingredient and view the results in a visually appealing format.
 
-## Table of Contents
+## Features
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Reference](#api-reference)
-- [Contributing](#contributing)
-- [License](#license)
+- Search for recipes by keyword or ingredient
+- View recipe details, including ingredients and instructions
+- Save favorite recipes for later viewing
+- Meal planner to plan out meals for the week
 
-## Installation
+## Technologies Used
 
-Explain how to install and set up the project. Include any dependencies that need to be installed, and instructions on how to run the project locally.
+- React
+- Material-UI
+- Spoonacular API
 
-## Usage
+## Getting Started
 
-Explain how to use the project, and any features or functionality that it includes. Provide examples and screenshots where appropriate.
+1. Clone the repository to your local machine
+2. Run `npm install` to install dependencies
+3. Obtain an API key from Spoonacular API and add it to the `.env` file
+4. Run `npm start` to start the application
 
-## API Reference
+## Acknowledgments
 
-If the project includes an API or other external resources, include information about how to access and use them here.
-
-## Contributing
-
-Explain how others can contribute to the project, and any guidelines or requirements for contributions. Include instructions on how to submit bug reports, feature requests, or pull requests.
+This project was created as part of a coding bootcamp and was inspired by my love for cooking and finding new recipes to try. Special thanks to Spoonacular API for providing the recipe data.
 
 ## License
 
-Include information about the project's license, and any usage or distribution restrictions that apply.
+This project is licensed under the MIT License. See LICENSE.md for more information.
