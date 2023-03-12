@@ -6,8 +6,8 @@ This is a recipe app called Yum Yum, which allows users to search for and save t
 
 - Search for recipes by keyword or ingredient
 - View recipe details, including ingredients and instructions
-- Save favorite recipes for later viewing
-- Meal planner to plan out meals for the week
+- Save favorite recipes for later viewing WIP
+- Meal planner to plan out meals for the week WIP
 
 ## Technologies Used
 
